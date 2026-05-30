@@ -6,7 +6,7 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/main/ruleset_txt/anti_list.txt
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/anti_list.txt
 - path: output/reject_ip.mrs
   format: mrs
   behavior: ipcidr
@@ -15,7 +15,7 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/main/ruleset_txt/anti_list.txt
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/anti_list.txt
 - path: output/global.mrs
   format: mrs
   behavior: domain
@@ -24,4 +24,13 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/main/ruleset_txt/Global.txt
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Global.txt
+- path: output/cn_ip.mrs
+  format: mrs
+  behavior: ipcidr
+  upstream:
+    anti_list:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/cn_ip.txt
