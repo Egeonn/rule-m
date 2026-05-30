@@ -1,6 +1,15 @@
-- path: output/reject.mrs
+- path: output/reject_domain.mrs
   format: mrs
   behavior: domain
+  upstream:
+    anti_list:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/main/ruleset_txt/anti_list.txt
+- path: output/reject_ip.mrs
+  format: mrs
+  behavior: ipcidr
   upstream:
     anti_list:
       type: http
