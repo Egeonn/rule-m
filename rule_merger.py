@@ -31,9 +31,8 @@ MIHOMO_PATH = 'mihomo'
 @dataclass
 class RuleSource:
     """规则源配置数据类"""
-    type: Literal['http', 'file']  # 使用 Literal 类型限制
+    type: Literal['http']  # ✅ 移除了 'file'
     url: str = ''
-    path: str = ''
     behavior: Literal['classical', 'ipcidr', 'domain'] = 'classical'
     format: Literal['text', 'yaml', 'mrs'] = 'yaml'
 
@@ -64,18 +63,17 @@ class RulesMerger:
     def _fetch_http_rules(self, url: str, rule_format: str, behavior: str = 'classical') -> List[str]:
         """获取在线规则"""
         try:
-            response = requests.get(url, timeout=10)
+            response = requests.get(url, timeout=30) # 延长超时时间以适应大规则集
             response.raise_for_status()
             
             content_type = response.headers.get('content-type', '')
-            # rule_format 优先；仅当格式未明确指定时依赖 Content-Type / URL 后缀推断
             is_yaml = (rule_format == 'yaml') or (
                 rule_format not in ('mrs', 'text') and
                 ('yaml' in content_type or url.endswith(('.yml', '.yaml')))
             )
+            
             if is_yaml:
                 data = yaml.safe_load(response.text)
-                # 处理可能的 payload 嵌套
                 if isinstance(data, dict) and 'payload' in data:
                     return data['payload'] or []
                 return data or []
@@ -138,7 +136,6 @@ class RulesMerger:
         
         suffix = parts[0].strip()
         domain = parts[1].strip()
-        # 验证域名格式
         if not DOMAIN_PATTERN.match(domain):
             return None
             
@@ -166,23 +163,6 @@ class RulesMerger:
             return None
         return f"DOMAIN,{rule}"
     
-    def _read_local_rules(self, path: str, rule_format: str, behavior: str = 'classical') -> List[str]:
-        """读取本地规则"""
-        try:
-            with open(path, 'r', encoding='utf-8') as f:
-                if rule_format == 'yaml':
-                    data = yaml.safe_load(f)
-                    # 处理可能的 payload 嵌套
-                    if isinstance(data, dict) and 'payload' in data:
-                        return data['payload'] or []
-                    return data or []
-                elif rule_format == 'mrs':
-                    return self._read_mrs_file(path, behavior)
-                return f.read().splitlines()
-        except Exception as e:
-            self.logger.error(f"读取本地规则失败 {path}: {str(e)}")
-            return []
-    
     def _clean_rule(self, rule: str) -> str:
         """清理规则中的注释内容"""
         rule = rule.strip()
@@ -203,10 +183,18 @@ class RulesMerger:
         rule_format = source.get('format', 'yaml')
         source_behavior = source.get('behavior', 'classical')
         
-        if source['type'] == 'http':
-            rules = self._fetch_http_rules(source['url'], rule_format, source_behavior)
-        elif source['type'] == 'file':
-            rules = self._read_local_rules(source['path'], rule_format, source_behavior)
+        # ✅ 只保留对 HTTP 在线源的处理，移除本地 file 判断
+        source_type = source.get('type', 'http')
+        if source_type == 'http':
+            # 确保必须要有 URL
+            url = source.get('url')
+            if url:
+                rules = self._fetch_http_rules(url, rule_format, source_behavior)
+            else:
+                self.logger.warning("HTTP 规则源缺失 url 参数，已跳过。")
+        else:
+            self.logger.warning(f"不支持的规则源类型: {source_type}，现仅支持 http 源。")
+            return []
         
         """mrs规则后续当作txt格式处理"""
         if rule_format == 'mrs':
@@ -218,7 +206,7 @@ class RulesMerger:
                 continue
             cleaned_rule = self._clean_rule(rule)
             transformed_rule = self._transform(cleaned_rule, source_behavior, target_behavior)
-            self.logger.debug(f"处理规则: {rule} -> {cleaned_rule} -> {transformed_rule}")
+            
             if not transformed_rule:
                 continue
             converted_rules.append(transformed_rule)
@@ -231,7 +219,6 @@ class RulesMerger:
             if 'upstream' not in config or not config.get('path'):
                 continue
             
-            # 获取目标格式（整个配置文件的输出格式）
             target_behavior = config.get('behavior', 'classical')
             target_format = config.get('format', 'yaml')
             merged_rules = []
@@ -240,15 +227,12 @@ class RulesMerger:
                 self.logger.info(f"{config.get('path')}: mrs格式不支持classical")
                 continue
             
-            # 处理每个上游源
             for source_name, source_config in config['upstream'].items():
                 rules = self._process_source(source_config, target_behavior)
                 merged_rules.extend(rules)
             
-            # 去重和排序
             merged_rules = sorted(set(merged_rules))
             
-            # 获取输出格式
             output_file = config['path']
             self._write_rules(output_file, merged_rules, target_format, target_behavior)
     
@@ -331,7 +315,6 @@ class RulesMerger:
 
     def _validate_domain_rule(self, rule: str) -> Optional[str]:
         """验证域名规则格式"""
-        # +.example.com 形式的 suffix 规则需要去掉前缀再验证
         domain = rule[2:] if rule.startswith('+.') else rule
         if DOMAIN_PATTERN.match(domain):
             return rule
@@ -348,7 +331,6 @@ class RulesMerger:
             output_path = tmp_out.name
 
         try:
-            # mihomo convert-ruleset <behavior> mrs <input> <output>
             cmd = [self.mihomo_path, 'convert-ruleset', behavior, 'mrs', input_path, output_path]
             result = subprocess.run(cmd, capture_output=True, text=True)
             
@@ -376,7 +358,6 @@ class RulesMerger:
             return False
             
         try:
-            # mihomo convert-ruleset <behavior> yaml <input> <output>
             cmd = [self.mihomo_path, 'convert-ruleset', behavior, 'text', input_path, output_path]
             result = subprocess.run(cmd, capture_output=True, text=True)
             
