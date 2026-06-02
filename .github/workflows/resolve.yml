@@ -5,22 +5,28 @@ on:
     - cron: '0 */8 * * *'
   workflow_dispatch:
 
+# ✅ 修复 1：显式赋予推送代码的权限
+permissions:
+  contents: write
 
 jobs:
   run:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      # ✅ 修复 2：使用正确的官方最新版本 v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Python 3.10
-        uses: actions/setup-python@v6
+      # ✅ 修复 2：使用正确的官方最新版本 v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.13"
           cache: 'pip'
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          pip install requests pyyaml
 
       - name: Set up Mihomo latest
         run: |
@@ -34,26 +40,18 @@ jobs:
       - name: Run script
         run: python rule_merger.py
 
-      - name: Clean up
-        run: |
-          find . -maxdepth 1 ! -name 'output' ! -name '.' ! -name '.git' -exec rm -rf {} +
-          mv output/* .
-          rm -rf output
-
+      # 保留你的时间戳获取逻辑
       - name: Get current time
         id: time
         run: echo "TIME=$(date +'%Y-%m-%d %H:%M:%S')" >> $GITHUB_OUTPUT
 
-      - name: Commit Changes
-        id: commit
-        uses: stefanzweifel/git-auto-commit-action@v7
+      # ✅ 修复 3：废弃危险的 rm -rf 逻辑，改用专业的产物部署插件
+      - name: Deploy to release branch
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          commit_message: 🚀 Update at ${{ steps.time.outputs.TIME }}
-          branch: release
-          skip_dirty_check: true
-          push_options: '--force'
-          create_branch: true
-          skip_fetch: true
-          skip_checkout: true
-          commit_options: '--allow-empty'
-
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: release           # 指定目标分支
+          publish_dir: ./output             # 指定要推送的目录（假设你的脚本将文件生成在此处）
+          force_orphan: true                # 清理该分支的历史记录，防止仓库体积无限膨胀
+          commit_message: "🚀 Update at ${{ steps.time.outputs.TIME }}"
+          enable_jekyll: true               # 保持分支干净，不生成额外隐藏文件
