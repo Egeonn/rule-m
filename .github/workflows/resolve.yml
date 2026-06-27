@@ -2,7 +2,7 @@ name: rule merger
 
 on:
   schedule:
-    - cron: '0 */8 * * *'
+    - cron: '21 0,4,12 * * *'
   workflow_dispatch:
 
 # ✅ 修复 1：显式赋予推送代码的权限
