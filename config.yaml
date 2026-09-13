@@ -25,7 +25,7 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Global.txt
-- path: output/cn_ip.mrs
+- path: output/geoip_cn.mrs
   format: mrs
   behavior: ipcidr
   upstream:
@@ -33,4 +33,4 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/cn_ip.txt
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/geoip_cn.txt
