@@ -48,7 +48,7 @@
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/AI.txt
       
-- path: output/Telegram_domain.mrs
+- path: output/telegram_domain.mrs
   format: mrs
   behavior: domain
   upstream:
@@ -58,7 +58,7 @@
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Telegram.txt
       
-- path: output/Telegram_ip.mrs
+- path: output/telegram_ip.mrs
   format: mrs
   behavior: ipcidr
   upstream:
@@ -160,7 +160,7 @@
       format: text
       url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
 
-- path: output/spotify.mrs
+- path: output/Spotify.mrs
   format: mrs
   behavior: domain
   upstream:
@@ -170,7 +170,7 @@
       format: text
       url: https://raw.githubusercontent.com/DustinWin/domain-list-custom/refs/heads/domains/spotify.list
 
-- path: output/youtube.mrs
+- path: output/YouTube.mrs
   format: mrs
   behavior: domain
   upstream:
