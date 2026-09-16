@@ -7,6 +7,7 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/anti_list.txt
+      
 - path: output/reject_ip.mrs
   format: mrs
   behavior: ipcidr
@@ -16,6 +17,7 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/anti_list.txt
+      
 - path: output/Global.mrs
   format: mrs
   behavior: domain
@@ -25,6 +27,7 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Global.txt
+      
 - path: output/geoip_cn.mrs
   format: mrs
   behavior: ipcidr
@@ -34,3 +37,155 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/geoip_cn.txt
+      
+- path: output/AI.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    AI:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/AI.txt
+      
+- path: output/Telegram_domain.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Telegram:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Telegram.txt
+      
+- path: output/Telegram_ip.mrs
+  format: mrs
+  behavior: ipcidr
+  upstream:
+    Telegram:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Telegram.txt
+      
+- path: output/Steam.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Steam:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Steam.txt
+      
+
+- path: output/TikTok.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    TikTok:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/xoxoxxx/refs/heads/idk/Rules/TikTok.txt
+      
+
+- path: output/Twitter.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    X:
+      type: http
+      behavior: classical
+      format: yaml
+      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitter/Twitter_No_Resolve.yaml
+
+- path: output/Twitch.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Twitch:
+      type: http
+      behavior: classical
+      format: yaml
+      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitch/Twitch_No_Resolve.yaml
+
+- path: output/Emby.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Emby:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/xoxoxxx/refs/heads/idk/Rules/Emby.txt
+
+- path: output/Facebook.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Facebook:
+      type: http
+      behavior: classical
+      format: yaml
+      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Facebook/Facebook_No_Resolve.yaml
+
+- path: output/Microsoft.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Microsoft:
+      type: http
+      behavior: classical
+      format: yaml
+      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+
+- path: output/Google.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Google:
+      type: http
+      behavior: classical
+      format: yaml
+      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google_No_Resolve.yaml
+
+- path: output/Apple.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Apple:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
+
+- path: output/Geo.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Geo:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/xoxoxxx/refs/heads/idk/Rules/Geo.txt
+
+- path: output/spotify.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Spotify:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/DustinWin/domain-list-custom/refs/heads/domains/spotify.list
+
+- path: output/youtube.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    YouTube:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/DustinWin/domain-list-custom/refs/heads/domains/youtube.list
