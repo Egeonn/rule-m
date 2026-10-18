@@ -27,6 +27,15 @@
       behavior: classical
       format: text
       url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Global.txt
+- path: output/GeositeCN.mrs
+  format: mrs
+  behavior: domain
+  upstream:
+    Global:
+      type: http
+      behavior: classical
+      format: text
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/GeositeCN.txt
       
 - path: output/geoip_cn.mrs
   format: mrs
