@@ -107,7 +107,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitter/Twitter_No_Resolve.yaml
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Twitter.txt
 
 - path: output/Twitch.mrs
   format: mrs
@@ -117,7 +117,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Twitch/Twitch_No_Resolve.yaml
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Twitch.txt
 
 - path: output/Emby.mrs
   format: mrs
@@ -137,7 +137,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Facebook/Facebook_No_Resolve.yaml
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Facebook.txt
 
 - path: output/Microsoft.mrs
   format: mrs
@@ -147,7 +147,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Microsoft.txt
 
 - path: output/Google.mrs
   format: mrs
@@ -157,7 +157,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Google/Google_No_Resolve.yaml
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Google.txt
 
 - path: output/Apple.mrs
   format: mrs
@@ -167,7 +167,7 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/Repcz/Tool/refs/heads/X/mihomo/Rules/Apple.list
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Apple.txt
 
 - path: output/Spotify.mrs
   format: mrs
@@ -177,7 +177,7 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/DustinWin/domain-list-custom/refs/heads/domains/spotify.list
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Spotify.txt
 
 - path: output/YouTube.mrs
   format: mrs
@@ -187,4 +187,4 @@
       type: http
       behavior: classical
       format: text
-      url: https://raw.githubusercontent.com/DustinWin/domain-list-custom/refs/heads/domains/youtube.list
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/YouTube.txt
