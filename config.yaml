@@ -99,7 +99,7 @@
       url: https://raw.githubusercontent.com/Egeonn/xoxoxxx/refs/heads/idk/Rules/TikTok.txt
       
 
-- path: output/Twitter.mrs
+- path: output/X.mrs
   format: mrs
   behavior: domain
   upstream:
@@ -107,7 +107,7 @@
       type: http
       behavior: classical
       format: yaml
-      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/Twitter.txt
+      url: https://raw.githubusercontent.com/Egeonn/kkk/refs/heads/release/X.txt
 
 - path: output/Twitch.mrs
   format: mrs
